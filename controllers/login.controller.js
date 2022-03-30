@@ -6,11 +6,17 @@ const login = (req, res) => {
       message: "Content can not be empty!",
     });
   } else {
-    const { userid, password } = req.body;
-    LoginService.login(userid, password);
-
-    res.status(200).send({
-      message: `${userid} logged Successfully`,
+    LoginService.login(req.body, (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the Tutorial.",
+        });
+      else if (data.length == 0) {
+        res.status(300).send({
+          message: "invalid Credentials",
+        });
+      } else res.send(data);
     });
   }
 };

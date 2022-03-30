@@ -1,7 +1,17 @@
 const db = require("../config/db");
 
-async function login({ userid, password }) {
-  const user = db.query(`SELECT * FROM USER WHERE userid =${userid}`);
-}
+login = (credentials, result) => {
+  db.query(
+    `SELECT * FROM user WHERE userid ="${credentials.userid}" and password="${credentials.password}"`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      result(null, res);
+    }
+  );
+};
 
 module.exports = { login };

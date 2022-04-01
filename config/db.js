@@ -1,5 +1,12 @@
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const config = require("./config");
+
+const Sequelize = require("sequelize");
+
+const sequalizeCon = new Sequelize(config.DB, config.USER, config.PASSWORD, {
+  host: "localhost",
+  dialect: "mysql",
+});
 
 let connection = mysql.createConnection({
   host: config.HOST,
@@ -13,4 +20,4 @@ connection.connect((err) => {
   console.log("Connected");
 });
 
-module.exports = connection;
+module.exports = { connection, sequalizeCon };

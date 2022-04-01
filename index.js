@@ -20,7 +20,7 @@ app.use(
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to Achuthan's Demo application." });
 });
 
 require("./routes/login.routes.js")(app);

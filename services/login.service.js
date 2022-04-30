@@ -1,9 +1,19 @@
 const { connection, sequalizeCon } = require("../config/db");
+const Joi = require("joi");
 
 login = (credentials, result) => {
-  const { userid, password } = credentials;
+ // const { userid, password } = credentials;
 
-  if (!(userid && password)) {
+  const schema = Joi.object({
+    userid: Joi.string().min(5).required(),
+    password: Joi.string().min(6).required(),
+  });
+
+  const result12 = schema.validate(credentials);
+
+  console.log(result12);
+
+  if (result12.error) {
     result(null, null);
     return;
   }

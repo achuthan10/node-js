@@ -4,8 +4,7 @@ const login = async (req, res) => {
   LoginService.login(req.body, (err, data) => {
     if (err) {
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Tutorial.",
+        message: err.message || "Some error occurred while login.",
       });
     } else if (data == null) {
       res.status(300).send({
